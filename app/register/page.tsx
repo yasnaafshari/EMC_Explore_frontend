@@ -9,13 +9,45 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const router = useRouter();
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Placeholder for actual registration logic
-    console.log({ name, email, password });
-    router.push('/dashboard'); // Redirect after registration (adjust as needed)
+
+    // Check if the email is from the erasmusmc.nl domain
+    const emailDomainRegex = /^[a-zA-Z0-9._%+-]+@erasmusmc\.nl$/;
+    if (!emailDomainRegex.test(email)) {
+      setEmailError('Please enter a valid email address from the erasmusmc.nl domain.');
+      return; // Prevent registration
+    }
+    setEmailError(''); // Clear error if valid
+
+    // Check for strong password (at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character)
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      setPasswordError('Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.');
+      return; // Prevent registration
+    }
+    setPasswordError(''); // Clear error if valid
+
+    try {
+      // Your registration API request
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        // Instead of redirecting to /dashboard, redirect to /verify-email
+        router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+      } else {
+        alert('Registration failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -49,6 +81,7 @@ export default function RegisterPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
+            {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
           </div>
 
           <div className="mb-4">
@@ -62,11 +95,13 @@ export default function RegisterPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
           </div>
 
           <button
             type="submit"
-            className="flex w-full items-center justify-center rounded bg-[#207B6E] hover:bg-[#176257] py-2 text-white ">
+            className="flex w-full items-center justify-center rounded bg-[#207B6E] hover:bg-[#176257] py-2 text-white"
+          >
             <UserPlus className="mr-2" /> Register
           </button>
         </form>
@@ -80,4 +115,3 @@ export default function RegisterPage() {
     </div>
   );
 }
-
