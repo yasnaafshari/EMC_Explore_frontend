@@ -84,17 +84,17 @@ const metadata = {
     icons: {
         icon: [
             {
-                url: '/logo.png',
+                url: '/public/logo.png',
                 sizes: '32x32',
                 type: 'image/png'
             },
             {
-                url: '/logo.png',
+                url: '/public/logo.png',
                 sizes: '16x16',
                 type: 'image/png'
             }
         ],
-        shortcut: '/logo.png',
+        shortcut: '/public/logo.png',
         apple: {
             url: '/logo.png',
             sizes: '180x180',

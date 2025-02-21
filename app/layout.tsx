@@ -17,10 +17,10 @@ export const metadata: Metadata = {
   description: "A platform for data analysis and visualization",
   icons: {
     icon: [
-      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
-      { url: '/logo.png', sizes: '16x16', type: 'image/png' }
+      { url: '/public/logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/public/logo.png', sizes: '16x16', type: 'image/png' }
     ],
-    shortcut: '/logo.png',
+    shortcut: '/public/logo.png',
     apple: { url: '/logo.png', sizes: '180x180', type: 'image/png' },
     other: [
       {

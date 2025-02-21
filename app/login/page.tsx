@@ -24,7 +24,7 @@ export default function LoginPage() {
     setEmailError(''); // Clear error if valid
 
     const result = await signIn('credentials', { redirect: false, email, password });
-    if (result?.ok) router.push('/dashboard');
+    if (result?.ok) router.push('/home');
   };
 
   return (
