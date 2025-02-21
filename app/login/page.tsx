@@ -9,10 +9,20 @@ import Link from 'next/link';
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Check if the email is from the erasmusmc.nl domain
+    const emailDomainRegex = /^[a-zA-Z0-9._%+-]+@erasmusmc\.nl$/;
+    if (!emailDomainRegex.test(email)) {
+      setEmailError('Please enter a valid email address from the erasmusmc.nl domain.');
+      return; // Prevent login attempt
+    }
+    setEmailError(''); // Clear error if valid
+
     const result = await signIn('credentials', { redirect: false, email, password });
     if (result?.ok) router.push('/dashboard');
   };
@@ -35,6 +45,7 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
+            {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
           </div>
 
           <div className="mb-4">
@@ -52,8 +63,8 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="flex w-full items-center justify-center rounded py-2 text-white bg-[#207B6E] hover:bg-[#14201D]
-">
+            className="flex w-full items-center justify-center rounded py-2 text-white bg-[#207B6E] hover:bg-[#14201D]"
+          >
             <LogIn className="mr-2" /> Login
           </button>
         </form>
