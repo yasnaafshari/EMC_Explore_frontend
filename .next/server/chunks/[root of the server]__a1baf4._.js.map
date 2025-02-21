@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 47, "column": 0}, "map": {"version":3,"sources":["file:///Users/adryan/Code/EMCExplore/EMC_Explore_frontend/app/api/register/route.ts"],"sourcesContent":["async function createUser(email: string, password: string) {\n  // TODO: Replace with actual database logic\n  // This is a temporary mock implementation\n  return {\n    id: '123',\n    email,\n    verified: false,\n    hashedPassword: password.length > 0 ? 'hashed_' + password : null\n  };\n}\n\nexport async function POST(req: Request) {\n    const { email, password } = await req.json();\n  \n    // Simulating user creation and sending verification email\n    const user = await createUser(email, password);\n    if (!user) {\n      return new Response(JSON.stringify({ message: \"Registration failed\" }), { status: 400 });\n    }\n  \n    return new Response(\n      JSON.stringify({ redirectTo: `/verify-email?email=${encodeURIComponent(email)}` }),\n      { status: 200 }\n    );\n  }\n  "],"names":[],"mappings":";;;AAAA,eAAe,WAAW,KAAa,EAAE,QAAgB;IACvD,2CAA2C;IAC3C,0CAA0C;IAC1C,OAAO;QACL,IAAI;QACJ;QACA,UAAU;QACV,gBAAgB,SAAS,MAAM,GAAG,IAAI,YAAY,WAAW;IAC/D;AACF;AAEO,eAAe,KAAK,GAAY;IACnC,MAAM,EAAE,KAAK,EAAE,QAAQ,EAAE,GAAG,MAAM,IAAI,IAAI;IAE1C,0DAA0D;IAC1D,MAAM,OAAO,MAAM,WAAW,OAAO;IACrC,uCAAW;;IAEX;IAEA,OAAO,IAAI,SACT,KAAK,SAAS,CAAC;QAAE,YAAY,CAAC,oBAAoB,EAAE,mBAAmB,QAAQ;IAAC,IAChF;QAAE,QAAQ;IAAI;AAElB"}},
+    {"offset": {"line": 73, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}
