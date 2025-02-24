@@ -1,15 +1,6 @@
 "use client";
-
 import { useState } from "react";
-import {
-  AppBar,
-  Box,
-  CssBaseline,
-  Drawer,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, CssBaseline, Drawer, IconButton, Toolbar, Typography } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import Sidebar from "@/components/Sidebar";
 
@@ -23,18 +14,21 @@ interface LayoutProps {
 export default function Layout({ title, children }: LayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const handleDrawerToggle = () => {
-    setSidebarOpen((prev) => !prev);
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
   };
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-
-      {/* Top Bar */}
       <AppBar position="fixed" sx={{ zIndex: 1201, backgroundColor: "#207B6E" }}>
         <Toolbar>
-          <IconButton color="inherit" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
+          <IconButton
+            color="inherit"
+            edge="start"
+            onClick={toggleSidebar}
+            sx={{ mr: 2 }}
+          >
             <Menu />
           </IconButton>
           <Typography variant="h6" noWrap>
@@ -42,12 +36,10 @@ export default function Layout({ title, children }: LayoutProps) {
           </Typography>
         </Toolbar>
       </AppBar>
-
-      {/* Sidebar */}
       <Drawer
         variant="temporary"
         open={sidebarOpen}
-        onClose={handleDrawerToggle}
+        onClose={toggleSidebar}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -60,8 +52,6 @@ export default function Layout({ title, children }: LayoutProps) {
       >
         <Sidebar />
       </Drawer>
-
-      {/* Main Content */}
       <Box
         component="main"
         sx={{

@@ -1,6 +1,6 @@
 'use client';
 import Layout from "@/components/Layout";
-import DataList from "@/components/DataList";
+import DataList from "@/components/DatasetList";
 import { useRouter } from "next/navigation";
 
 export default function DataExploration() {
