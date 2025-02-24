@@ -11,10 +11,10 @@ const Sidebar = () => {
   // Menu items including the Logout item
   const menuItems = [
     { name: 'Home', href: '/home', icon: <Home /> },
-    { name: 'Data Exploration', href: '/home/data-exploration', icon: <Search /> },
-    { name: 'Visualization', href: '/home/visualization', icon: <BarChart /> },
-    { name: 'Statistical Analysis', href: '/home/statistical-analysis', icon: <Timeline /> },
-    { name: 'Admin Panel', href: '/home/admin', icon: <Settings /> },
+    { name: 'Data Exploration', href: '/data-exploration', icon: <Search /> },
+    { name: 'Visualization', href: '/data-visualization', icon: <BarChart /> },
+    { name: 'Statistical Analysis', href: '/statistical-analysis', icon: <Timeline /> },
+    { name: 'Admin Panel', href: '/admin', icon: <Settings /> },
     { name: 'Logout', href: '/logout', icon: <Logout />, isLogout: true }, // Added Logout item here
   ];
 
